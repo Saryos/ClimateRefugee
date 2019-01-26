@@ -7,6 +7,10 @@ using System;
 
 //data for game
 
+public struct House{
+	public int[] pollution;
+}
+
 public struct Resource{
 	public string name;
 	public int amount;
@@ -72,6 +76,7 @@ public class logicData{
 	public Defence[] defences; 
 	public Improvement[] improvements; 
 	public Disaster[] disasters;
+	public House house;
 
 	public void LoadControlData(){
 		FileStream fs = new FileStream("datasettings.txt", FileMode.Open, FileAccess.Read);
@@ -91,6 +96,7 @@ public class logicData{
 				if(txtbits[1] == "disasters"){
 					noDisasters=int.Parse(txtbits[2]);
 					disasters = new Disaster[noDisasters];
+					house.pollution = new int[noDisasters];
 				}
 				if(txtbits[1] == "defences"){
 					noDefences=int.Parse(txtbits[2]);
@@ -134,6 +140,14 @@ public class logicData{
 					txtbits = txt.Split(' ');
 
 					disasters[i]=new Disaster(txtbits[0], 0, 10);
+				}			
+			}
+
+			if(txtbits[0]=="house"){
+				txt = sr.ReadLine();
+				txtbits = txt.Split(' ');
+				for(int i=0; i<noDisasters; i++){
+					house.pollution[i]=int.Parse(txtbits[i]);
 				}			
 			}
 

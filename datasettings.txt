@@ -3,6 +3,9 @@
 # disasters 4
 # defences 2
 
+house
+5 5 5 5
+
 disasters
 Flood
 Fire
@@ -28,4 +31,3 @@ Oven 1 1
 0 1 0 0
 Solar_Panels 2 5
 1 0 1 1
-

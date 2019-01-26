@@ -9,6 +9,7 @@ public class myGui : MonoBehaviour
 {
 	gameMaster myMaster;
 	logicData data = null;
+	gameState game = null;
 
 	public void setGamemaster(gameMaster master){
 		myMaster = master;
@@ -18,7 +19,9 @@ public class myGui : MonoBehaviour
 		if(data==null){
 			data = myMaster.giveData();
 		}
-
+		if(game==null){
+			game = myMaster.giveGamestate();
+		}
 
 
 
@@ -36,6 +39,13 @@ public class myGui : MonoBehaviour
 		for(int i=0; i<data.noDisasters; i++){
 			GUI.Box(new Rect(300,20+30*i,100,30), data.disasters[i].name + " " + data.disasters[i].value);
 		}
+
+		for(int i=0; i<data.noDefences; i++){
+			if(GUI.Button(new Rect(10,20+30*i,100,30), data.defences[i].name + " " + data.defences[i].level)){
+				myMaster.buildDefence(i);
+			}
+		}
+
 
 		for(int i=0; i<data.noDisasters; i++){
 			if (data.disasters [i].value > data.disasters [i].treshold) {
