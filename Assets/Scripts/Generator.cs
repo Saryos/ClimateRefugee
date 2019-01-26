@@ -11,6 +11,8 @@ public class Generator : MonoBehaviour
     public Tile waterTile_;
     public Tile sandTile_;
 
+    public GameObject tree_;
+
     public int levelWidth_ = 40;
     public int levelHeight_ = 40;
 
@@ -33,13 +35,19 @@ public class Generator : MonoBehaviour
 
                 if (heightValue > -0.5 ) // too high for water
                 {
-                    if (heightValue < -0.3 ||drynessValue > 0.5) // close to water or too dry
+                    if (heightValue < -0.3 || drynessValue > 0.5) // close to water or too dry
                     {
                         tilemap_.SetTile(new Vector3Int(i, j, 0), sandTile_);
                     }
                     else
                     {
                         tilemap_.SetTile(new Vector3Int(i, j, 0), grassTile_);
+                        bool isTree = Random.Range(0, 2) == 1;
+                        if (heightValue > 0 && isTree && drynessValue < 0.4)
+                        {
+                            Vector3 treePosition = tilemap_.CellToWorld(new Vector3Int(i,j,0));
+                            Instantiate(tree_, treePosition + new Vector3(0,0.5f,0), Quaternion.identity);
+                        }
                     }
                 }
                 else
