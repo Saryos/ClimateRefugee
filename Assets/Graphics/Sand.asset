@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: sand
+  m_Name: Sand
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 17346c16ca3fb7040a3222b12de5f573, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 426be58e880c46844b1814f5ccb00577, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
