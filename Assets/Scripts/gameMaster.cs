@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameMaster : MonoBehaviour
-{
+public class gameMaster : MonoBehaviour{
+
+	public GameObject[] defencePrefabs; // Fill in editor!
+
 	gameState game;
 	myGui gui;
 	logicData data;
@@ -22,6 +24,30 @@ public class gameMaster : MonoBehaviour
 
 	public logicData giveData(){
 		return data;
+	}
+
+	public bool buildDefence(int id){
+	// can we afford building?
+		for(int j=0; j<data.noResources; j++){
+			if(data.resources[j].amount < data.defences[id].cost[j]){
+				return false;
+			}
+		}
+
+		//build
+		data.defences[id].level += 1;
+		for(int j=0; j<data.noResources; j++){
+			data.resources[j].amount -= data.defences[id].cost[j];
+		}
+
+		// instantiate graphics
+		if(defencePrefabs.Length < id){
+			MonoBehaviour.print("ERROR: Missing prefab from defence building array (did you fill it in editor?)");
+			return false;
+		}
+		Vector3 pos = new Vector3(3,3,0);
+		Instantiate(defencePrefabs[id],pos, Quaternion.identity);
+		return true;
 	}
 
     // Start is called before the first frame update
