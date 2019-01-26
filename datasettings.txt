@@ -19,6 +19,9 @@ Wall 2 2
 Roof 1 0
 3 2 2 5
 
+
+name [resource costs]
+[environmental bonuses]
 improvements
 Oven 1 1
 0 1 0 0

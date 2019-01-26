@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class gameState : MonoBehaviour{
 
+	gameMaster myMaster;
+
 	enum DISASTERS {HURRICANE, FIRE, FLOOD, QUAKE, ARMAGEDDON};
 	enum RESOURCES {WOOD, ROCK};
 	// defenses: against single disaster or multiple?
@@ -11,10 +13,15 @@ public class gameState : MonoBehaviour{
 	enum IMPROVEMENTS {INSULATION, ENERGY, OVEN}
 
 
+
 	double[] dangerLevels = new double[ System.Enum.GetNames(typeof(DISASTERS)).Length];
 	int[] resourceLevels = new int[System.Enum.GetNames(typeof(RESOURCES)).Length];
 	int[] defenceLevels = new int[System.Enum.GetNames(typeof(DEFENCES)).Length];
 	int[] improvementLevels = new int[System.Enum.GetNames(typeof(IMPROVEMENTS)).Length];
+
+	public void setGamemaster(gameMaster master){
+		myMaster = master;
+	}
 
 	void addResource (RESOURCES resurssi, int amount){
 		resourceLevels[(int)resurssi] += amount;
