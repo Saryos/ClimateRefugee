@@ -1,0 +1,27 @@
+# resources 2
+# improvements 2
+# disasters 4
+# defences 2
+
+disasters
+Flood
+Fire
+Hurricane
+Quake
+
+resources
+Wood 1 2 0 0
+Stone 1 0 2 2
+
+defences
+Wall 2 2
+3 5 2 2
+Roof 1 0
+3 2 2 5
+
+improvements
+Oven 1 1
+0 1 0 0
+Solar_Panels 2 5
+1 0 1 1
+
