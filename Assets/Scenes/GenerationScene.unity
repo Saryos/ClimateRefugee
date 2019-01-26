@@ -381,6 +381,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f39d4fde729d644968ab4f6b81adfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilemap_: {fileID: 1735043153}
+  grassTile_: {fileID: 11400000, guid: 80c44b14056b6f24db66838e9fe3beae, type: 2}
+  waterTile_: {fileID: 11400000, guid: ef42b262d5b1aab42be137975e6e56e7, type: 2}
+  levelWidth_: 40
+  levelHeight_: 40
 --- !u!4 &1933273359
 Transform:
   m_ObjectHideFlags: 0
