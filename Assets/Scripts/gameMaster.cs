@@ -20,6 +20,10 @@ public class gameMaster : MonoBehaviour
 		data = new logicData();
 	}
 
+	public logicData giveData(){
+		return data;
+	}
+
     // Start is called before the first frame update
     void Start(){
 		data.LoadControlData();

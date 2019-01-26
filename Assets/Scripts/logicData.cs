@@ -8,9 +8,9 @@ using System;
 //data for game
 
 public struct Resource{
-	string name;
-	int amount;
-	int[] pollution;
+	public string name;
+	public int amount;
+	public int[] pollution;
 
 	public Resource (string a, int b, int[] c){
 		name=a;
@@ -20,10 +20,10 @@ public struct Resource{
 }
 
 public struct Defence{
-	string name;
-	int level;
-	int[] cost;
-	int[] value;
+	public string name;
+	public int level;
+	public int[] cost;
+	public int[] value;
 
 	public Defence (string a, int b, int[] c, int[] d){
 		name = a;
@@ -35,10 +35,10 @@ public struct Defence{
 }
 
 public struct Improvement{
-	string name;
-	int level;
-	int[] cost;
-	int[] value;
+	public string name;
+	public int level;
+	public int[] cost;
+	public int[] value;
 
 	public Improvement (string a, int b, int[] c, int[] d){
 		name = a;
@@ -47,19 +47,31 @@ public struct Improvement{
 		value = d;
 	}
 }
-	
+
+public struct Disaster{
+	public string name;
+	public double value;
+	public double treshold;
+
+	public Disaster(string a, double b, double c){
+		name = a;
+		value = b;
+		treshold = c;
+	}
+}
 
 
 
 public class logicData{
-	int noResources = 0;
-	int noDisasters = 0;
-	int noDefences = 0;
-	int noImprovements = 0;
+	public int noResources = 0;
+	public int noDisasters = 0;
+	public int noDefences = 0;
+	public int noImprovements = 0;
 
 	public Resource[] resources; 
 	public Defence[] defences; 
 	public Improvement[] improvements; 
+	public Disaster[] disasters;
 
 	public void LoadControlData(){
 		FileStream fs = new FileStream("datasettings.txt", FileMode.Open, FileAccess.Read);
@@ -74,15 +86,19 @@ public class logicData{
 			if(txtbits [0] == "#"){
 				if(txtbits[1] == "resources"){
 					noResources=int.Parse(txtbits[2]);
+					resources = new Resource[noResources];
 				}
 				if(txtbits[1] == "disasters"){
 					noDisasters=int.Parse(txtbits[2]);
+					disasters = new Disaster[noDisasters];
 				}
 				if(txtbits[1] == "defences"){
 					noDefences=int.Parse(txtbits[2]);
+					defences = new Defence[noDefences];
 				}
 				if(txtbits[1] == "improvements"){
 					noImprovements=int.Parse(txtbits[2]);
+					improvements = new Improvement[noImprovements];
 				}
 				continue;
 			}
@@ -93,9 +109,9 @@ public class logicData{
 				MonoBehaviour.print("error: Amount values must be at the beginning of the file");
 			}
 
-			resources = new Resource[noResources];
-			defences = new Defence[noDefences];
-			improvements = new Improvement[noImprovements];
+
+
+
 
 			//quick & dirty
 			if(txtbits[0]=="resources"){
@@ -108,6 +124,16 @@ public class logicData{
 						temp[j] = int.Parse(txtbits[j+1]);
 					}
 					resources[i]=new Resource(txtbits[0], 0, temp);
+					MonoBehaviour.print(resources[i].amount);
+				}			
+			}
+
+			if(txtbits[0]=="disasters"){
+				for(int i=0; i<noDisasters; i++){
+					txt = sr.ReadLine();
+					txtbits = txt.Split(' ');
+
+					disasters[i]=new Disaster(txtbits[0], 0, 10);
 				}			
 			}
 
@@ -158,27 +184,9 @@ public class logicData{
 					improvements[i]=new Improvement(name, 0, temp, temp2);
 				}			
 			}
-
-				/*
-			bool found = false;
-			for(int k=0; k<3 ; k++){
-				for(int j=0; j<2 && gelements[k][j]!=null; j++){
-					for(int i=0; i<gelements[k][j].Count; i++){
-						if(gelements[k][j][i].gtexta==txtbits[0]){
-							if (found==true){
-								print("WARNING: multiple values with same idenfier" + txtbits[0]);
-							}
-							found = true;
-							print("found "+txtbits[0]+" "+txtbits[3]);
-							gelements[k][j][i].val.v=float.Parse(txtbits[3]);
-						}
-					}
-				}
-			}
-*/
 		}
 		MonoBehaviour.print("Something loaded from file datasettings.txt");
-
+		MonoBehaviour.print(resources[0].amount);
 		sr.Close();
 		fs.Close();
 	}

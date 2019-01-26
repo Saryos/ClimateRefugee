@@ -9,6 +9,7 @@ Fire
 Hurricane
 Quake
 
+name [environmental damage for each disaster]
 resources
 Wood 1 2 0 0
 Stone 1 0 2 2
