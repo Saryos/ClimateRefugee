@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1231981731353006350
+--- !u!1 &2431801532186639283
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1231981731353006348}
-  - component: {fileID: 1231981731353006349}
+  - component: {fileID: 2431801532186639285}
+  - component: {fileID: 2431801532186639284}
   m_Layer: 0
-  m_Name: Generator
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1231981731353006348
+--- !u!4 &2431801532186639285
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231981731353006350}
+  m_GameObject: {fileID: 2431801532186639283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 468.54385, y: 365.7508, z: -18.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1231981731353006349
+--- !u!114 &2431801532186639284
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231981731353006350}
+  m_GameObject: {fileID: 2431801532186639283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f39d4fde729d644968ab4f6b81adfa, type: 3}
+  m_Script: {fileID: 11500000, guid: d9289a81373ade7468f9aea8e9695f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPF_: {fileID: 5091111451712705031, guid: 1a2ec4459cbff414da517f1f4f3563ca, type: 3}
-  grassTile_: {fileID: 11400000, guid: 80c44b14056b6f24db66838e9fe3beae, type: 2}
-  waterTile_: {fileID: 11400000, guid: ef42b262d5b1aab42be137975e6e56e7, type: 2}
-  sandTile_: {fileID: 11400000, guid: 3a6df05601f70304a93f555e185c46de, type: 2}
-  tree_: {fileID: 5591930983220999927, guid: 95944a5a21dfb5e41a6a030b4ad45d8d, type: 3}
+  defencePrefabs:
+  - {fileID: 8488391644721156538, guid: 37774b7fea97693438f1e24f12aeb371, type: 3}
+  - {fileID: 3258720019872333772, guid: e7e99f81eaae37042a50473cb31ffb79, type: 3}

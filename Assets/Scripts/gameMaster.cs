@@ -9,8 +9,16 @@ public class gameMaster : MonoBehaviour{
 	gameState game;
 	myGui gui;
 	logicData data;
-	
-	public gameState giveGamestate(){
+
+    public GameObject generatorPF;
+    private GameObject generator = null;
+
+
+    public int levelWidth_ = 40;
+    public int levelHeight_ = 40;
+
+
+    public gameState giveGamestate(){
 		return game;
 	}
 
@@ -52,12 +60,38 @@ public class gameMaster : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start(){
+
 		data.LoadControlData();
+
+        createWorld();
     }
+
+
+    void createWorld()
+    {
+        Debug.Log("Creating world");
+        generator = Instantiate(generatorPF, transform.position, Quaternion.identity);
+
+        Generator g = generator.GetComponent<Generator>();
+        g.generateScenario(levelWidth_, levelHeight_, 0.0f, 0.0f);
+    }
+
+    void destroyWorld()
+    {
+        Destroy(generator);
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         
     }
+
+    void nextDay()
+    {
+        destroyWorld();
+        createWorld();
+    }
+
 }
