@@ -190,6 +190,12 @@ PrefabInstance:
       propertyPath: tilemap_
       value: 
       objectReference: {fileID: 1735043153}
+    - target: {fileID: 1231981731353006349, guid: 4075ebab68d69c54db84717e27eabe70,
+        type: 3}
+      propertyPath: sandTile_
+      value: 
+      objectReference: {fileID: 11400000, guid: 3a6df05601f70304a93f555e185c46de,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4075ebab68d69c54db84717e27eabe70, type: 3}
 --- !u!1001 &5091111451355733012
