@@ -34,6 +34,10 @@ public class gameMaster : MonoBehaviour{
 		return data;
 	}
 
+	public void addResource(int id){
+		data.resources[id].amount += 1;
+	}
+
 	public bool buildDefence(int id){
 	// can we afford building?
 		for(int j=0; j<data.noResources; j++){
