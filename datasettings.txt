@@ -14,8 +14,8 @@ Quake
 
 name [environmental damage for each disaster]
 resources
-Wood 5 10 0 0
-Stone 5 0 10 10
+Wood 10 2 0 0
+Stone 5 10 10 10
 
 defences
 Wall 2 2

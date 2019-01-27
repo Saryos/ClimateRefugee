@@ -205,7 +205,19 @@ public class gameMaster : MonoBehaviour{
 	//disaster strikes
 	bool disaster(int id){
 
-        fire.ALL_CONSUMING_INFERNO();
+
+        if (id == 0)
+        {
+            Generator g = generator.GetComponent<Generator>();
+            g.floodLevel();
+
+        }
+        else
+        {
+            fire.ALL_CONSUMING_INFERNO();
+        }
+
+        
 
         int total_defence=0;
 		//check for game lost
