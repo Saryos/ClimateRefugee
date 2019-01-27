@@ -48,3 +48,4 @@ MonoBehaviour:
   waterTile_: {fileID: 11400000, guid: ef42b262d5b1aab42be137975e6e56e7, type: 2}
   sandTile_: {fileID: 11400000, guid: 3a6df05601f70304a93f555e185c46de, type: 2}
   tree_: {fileID: 5591930983220999927, guid: 95944a5a21dfb5e41a6a030b4ad45d8d, type: 3}
+  rock_: {fileID: 575468090752550291, guid: 8f15af6c498b3444fbaa3d75d6352ca9, type: 3}

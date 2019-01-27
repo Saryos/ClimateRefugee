@@ -69,6 +69,23 @@ public class Generator : MonoBehaviour
             }
         }
 
+        // generate rocks
+
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+
+
+        PlayerStart_ = RandomWalkableLoc(width, height);
+
+    }
+
+    Vector2 RandomWalkableLoc(int width, int height)
+    {
         bool found = false;
         int attempts = 30;
 
@@ -81,9 +98,10 @@ public class Generator : MonoBehaviour
             if (IsTileWalkable(new Vector2(xloc, yloc)))
             {
                 found = true;
-                PlayerStart_ = new Vector2(xloc, yloc);
+                return new Vector2(xloc, yloc);
             }
         }
+        return new Vector2(0, 0);
     }
 
     public Vector3 GetPlayerStartPosition()
