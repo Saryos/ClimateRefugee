@@ -22,7 +22,16 @@ public class WorkerControl : MonoBehaviour
             Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Debug.Log("tried to move worker to position " + target.ToString());
 
-            selectedWorker_.moveHere(target);
+
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            {
+                selectedWorker_.AddWaypoint(target);
+            }
+            else
+            {
+                selectedWorker_.FirstMove(target);
+            }
+
         }
         
     }

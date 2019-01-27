@@ -10,8 +10,17 @@ public class Movement : MonoBehaviour
 
     private List<Vector2> route_ = new List<Vector2>();
 
-    public void moveHere(Vector3 position)
+    public void FirstMove(Vector3 position)
     {
+        Debug.Log("Adding the first movement");
+        route_.Clear();
+        route_.Add(new Vector2(position.x, position.y));
+    }
+
+    public void AddWaypoint(Vector3 position)
+    {
+
+        Debug.Log("Adding waypoint");
         route_.Add(new Vector2(position.x, position.y));
     }
 
