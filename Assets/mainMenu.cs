@@ -13,7 +13,7 @@ public class mainMenu : MonoBehaviour
 
     public void onClickStartGame()
     {
-        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.visible = true;
         Application.LoadLevel(1);
     }
 
