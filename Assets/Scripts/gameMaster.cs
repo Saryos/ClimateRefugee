@@ -13,6 +13,8 @@ public class gameMaster : MonoBehaviour{
 	public AudioSource new_day_music;
 	public AudioSource defeat_music;
 
+    public Firestorm fire;
+
 	gameState game;
 	myGui gui;
 	logicData data;
@@ -202,7 +204,10 @@ public class gameMaster : MonoBehaviour{
 
 	//disaster strikes
 	bool disaster(int id){
-		int total_defence=0;
+
+        fire.ALL_CONSUMING_INFERNO();
+
+        int total_defence=0;
 		//check for game lost
 		for(int i=0; i<data.noDefences; i++){
 			total_defence += data.defences[i].level*data.defences[i].value[id];
