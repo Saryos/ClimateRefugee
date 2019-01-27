@@ -18,7 +18,14 @@ public class Movement : MonoBehaviour
 
 
     private Generator gen_ = null;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
+    private void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
 
     void cancelCollection()
     {
@@ -144,6 +151,33 @@ public class Movement : MonoBehaviour
                 {
                     Vector2 newCarPos = cartesianPos + trip.normalized * movement;
                     Vector2 newFinalPosition = cartesianToIso(newCarPos);
+
+                    Vector2 deltaInIso = newFinalPosition - (Vector2)transform.position;
+
+                    if(deltaInIso.sqrMagnitude == 0f)
+                    {
+                        animator.SetInteger("State", 0);
+                    }
+                    else
+                    {
+                        if (deltaInIso.y > 0f)
+                        {
+                            animator.SetInteger("State", 1);
+                        }
+                        else
+                        {
+                            animator.SetInteger("State", 2);
+                        }
+                        if(deltaInIso.x > 0f)
+                        {
+                            spriteRenderer.flipX = false;
+                        }
+                        else
+                        {
+                            spriteRenderer.flipX = true;
+                        }
+                    }
+
 
                     if (gen_.IsTileWalkable(newFinalPosition))
                     {
