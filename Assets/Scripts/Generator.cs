@@ -13,10 +13,12 @@ public class Generator : MonoBehaviour
     public Tile sandTile_;
 
     public GameObject tree_;
+    public GameObject rock_;
 
     private NoiseTest.OpenSimplexNoise noise_ = new NoiseTest.OpenSimplexNoise();
 
 
+    Vector3 PlayerStart_;
 
     public void generateScenario(int width, int height, float dryOffset, float heightOffset)
     {
@@ -66,8 +68,57 @@ public class Generator : MonoBehaviour
 
             }
         }
+
+        // generate rocks
+
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+        Instantiate(rock_, RandomWalkableLoc(width, height), Quaternion.identity);
+
+
+        PlayerStart_ = RandomWalkableLoc(width, height);
+
     }
 
+    Vector2 RandomWalkableLoc(int width, int height)
+    {
+        bool found = false;
+        int attempts = 30;
+
+        for (int i = 0; i < attempts && !found; ++i)
+        {
+            int xloc = Random.Range(0, width);
+            int yloc = Random.Range(0, height);
+
+
+            if (IsTileWalkable(new Vector2(xloc, yloc)))
+            {
+                found = true;
+                return new Vector2(xloc, yloc);
+            }
+        }
+        return new Vector2(0, 0);
+    }
+
+    public Vector3 GetPlayerStartPosition()
+    {
+        return new Vector3(PlayerStart_.x, PlayerStart_.y, 0);
+    }
+
+
+
+    public bool CanBuild(Vector2 location)
+    {
+        Vector2 v1 = location;
+        Vector2 v2 = new Vector2(location.x + 1, location.y);
+        Vector2 v3 = new Vector2(location.x, location.y + 1);
+        Vector2 v4 = new Vector2(location.x + 1, location.y + 1);
+        return IsTileWalkable(v1) && IsTileWalkable(v2) && IsTileWalkable(v3) && IsTileWalkable(v4);
+    }
 
     public bool IsTileWalkable(Vector2 tileLocation)
     {

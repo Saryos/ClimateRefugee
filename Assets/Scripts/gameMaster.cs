@@ -22,6 +22,8 @@ public class gameMaster : MonoBehaviour{
     public GameObject generatorPF;
     private GameObject generator = null;
 
+    public GameObject worker_;
+    private GameObject worker2;
 
     public int levelWidth_ = 64;
     public int levelHeight_ = 64;
@@ -144,11 +146,20 @@ public class gameMaster : MonoBehaviour{
 
         Generator g = generator.GetComponent<Generator>();
         g.generateScenario(levelWidth_, levelHeight_, 0.0f, 0.0f);
+
+        Vector3 start = g.GetPlayerStartPosition();
+
+        worker2 = Instantiate(worker_, start, Quaternion.identity);
+
+        Camera.main.transform.position = new Vector3(start.x, start.y, -10);
+
+        Camera.main.gameObject.GetComponent<WorkerControl>().selectedWorker_ = worker2.GetComponent<Movement>();
     }
 
     void destroyWorld()
     {
         Destroy(generator);
+        Destroy(worker2);
     }
 
 
