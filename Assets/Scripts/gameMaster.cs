@@ -23,8 +23,8 @@ public class gameMaster : MonoBehaviour{
     private GameObject generator = null;
 
 
-    public int levelWidth_ = 40;
-    public int levelHeight_ = 40;
+    public int levelWidth_ = 64;
+    public int levelHeight_ = 64;
 
 	public double gameSpeed = 1.0;
 	double oldGameSpeed = 0; // save speed durig pause
