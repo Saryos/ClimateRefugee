@@ -17,6 +17,7 @@ public class gameMaster : MonoBehaviour{
     public int levelWidth_ = 40;
     public int levelHeight_ = 40;
 
+	public double gameSpeed = 1;
 
     public gameState giveGamestate(){
 		return game;

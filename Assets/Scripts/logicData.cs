@@ -64,7 +64,10 @@ public struct Disaster{
 	}
 }
 
-
+// advance of disaster on scale 0-1
+public double disasterAdvance(int id){
+	return (data.disasters[id].value/data.disasters[id].treshold);
+}
 
 public class logicData{
 	public int noResources = 0;
