@@ -45,6 +45,7 @@ public class Collectable : MonoBehaviour
     }
 
 
+
     public void WantToCollect()
     {
         renderer_.color = new Color(0.9f, 0.9f,0.3f);

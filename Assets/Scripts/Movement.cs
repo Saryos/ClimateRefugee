@@ -16,7 +16,6 @@ public class Movement : MonoBehaviour
 
     private bool isCollecting = false;
 
-
     private Generator gen_ = null;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -45,7 +44,10 @@ public class Movement : MonoBehaviour
         toCollect_.Add(resource);
 
         Collectable c = resource.GetComponent<Collectable>();
-        c.WantToCollect();
+        if (c.resourceAmount_ != 0)
+        {
+            c.WantToCollect();
+        }
     }
 
     public void MoveHere(Vector3 position, bool waypoint)
