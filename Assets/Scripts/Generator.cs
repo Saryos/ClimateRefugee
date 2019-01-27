@@ -16,6 +16,8 @@ public class Generator : MonoBehaviour
 
     private NoiseTest.OpenSimplexNoise noise_ = new NoiseTest.OpenSimplexNoise();
 
+
+
     public void generateScenario(int width, int height, float dryOffset, float heightOffset)
     {
         Debug.Log("Creating map");
@@ -65,6 +67,35 @@ public class Generator : MonoBehaviour
             }
         }
     }
+
+
+    public bool IsTileWalkable(Vector2 tileLocation)
+    {
+        Grid gridComp = grid.GetComponent<Grid>();
+        Vector3Int tileLoc = gridComp.WorldToCell(tileLocation);
+        Tilemap tilemap = grid.GetComponentInChildren<Tilemap>();
+
+        Vector3Int mapSize = tilemap.size;
+
+        if (tileLoc.x >= 0 && tileLoc.y >= 0 && tileLoc.x < tilemap.size.x && tileLoc.y < tilemap.size.y)
+        {
+            TileBase tile = tilemap.GetTile(tileLoc);
+            Debug.Log(tile.name);
+
+            if (tile.name == "Water")
+            {
+                return false;
+            }
+
+        }
+        else
+        {
+            return false;
+        }
+
+        return true;
+    }
+
 
 
     // Update is called once per frame

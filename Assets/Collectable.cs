@@ -45,6 +45,16 @@ public class Collectable : MonoBehaviour
     }
 
 
+    public void WantToCollect()
+    {
+        renderer_.color = new Color(0.9f, 0.9f,0.3f);
+    }
+
+    public void CancelCollect()
+    {
+        renderer_.color = Color.white;
+    }
+
 
     // Start is called before the first frame update
     void Start()

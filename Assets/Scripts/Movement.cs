@@ -17,18 +17,28 @@ public class Movement : MonoBehaviour
     private bool isCollecting = false;
 
 
+    private Generator gen_ = null;
+
+
+    void cancelCollection()
+    {
+        foreach (GameObject res in toCollect_)
+        {
+            Collectable c2 = res.GetComponent<Collectable>();
+            c2.CancelCollect();
+        }
+        toCollect_.Clear();
+    }
+
     public void collectResource(GameObject resource, bool waypoint)
     {
+        MoveHere(resource.transform.position, waypoint);
         Debug.Log("Ordered a collection");
-
-        if (!waypoint)
-        {
-            toCollect_.Clear();
-        }
 
         toCollect_.Add(resource);
 
-        MoveHere(resource.transform.position, waypoint);
+        Collectable c = resource.GetComponent<Collectable>();
+        c.WantToCollect();
     }
 
     public void MoveHere(Vector3 position, bool waypoint)
@@ -37,22 +47,45 @@ public class Movement : MonoBehaviour
         if (!waypoint)
         {
             route_.Clear();
+            cancelCollection();
         }
 
-        route_.Add(new Vector2(position.x, position.y));
+        Vector2 startPosition = transform.position;
+        Vector2 targetPosition = new Vector2(position.x, position.y);
+
+        if (route_.Count != 0)
+        {
+            startPosition = route_[route_.Count - 1];
+        }
+
+        AStar(startPosition, targetPosition);
     }
+
+    void AStar(Vector2 startPosition, Vector2 endPosition)
+    {
+        if (gen_ == null)
+        {
+            GameObject[] gens = GameObject.FindGameObjectsWithTag("Generator");
+            gen_ = gens[0].GetComponent<Generator>();
+        }
+
+        if (gen_.IsTileWalkable(endPosition))
+        {
+            route_.Add(new Vector2(endPosition.x, endPosition.y));
+        }
+
+    }
+
     public Vector2 isoToCartesian(Vector2 isoCoord)
     {
-        float carX = (isoCoord.x + isoCoord.y * 2)/ 2;
-        return new Vector2(carX, - isoCoord.x + carX);
+        float carX = (isoCoord.x + isoCoord.y * 2) / 2;
+        return new Vector2(carX, -isoCoord.x + carX);
     }
 
     public Vector2 cartesianToIso(Vector2 cartesian)
     {
         return new Vector2(cartesian.x - cartesian.y, (cartesian.x + cartesian.y) / 2);
     }
-
-
 
 
     // Update is called once per frame
@@ -76,7 +109,12 @@ public class Movement : MonoBehaviour
 
                     if (c.collect(Time.deltaTime))
                     {
+                        if (route_.Count != 0)
+                        {
+                            route_.RemoveAt(0);
+                        }
                         toCollect_.RemoveAt(0);
+                        c.CancelCollect();
                     }
 
                 }
@@ -105,8 +143,14 @@ public class Movement : MonoBehaviour
                 else
                 {
                     Vector2 newCarPos = cartesianPos + trip.normalized * movement;
-                    transform.position = cartesianToIso(newCarPos);
+                    Vector2 newFinalPosition = cartesianToIso(newCarPos);
+
+                    if (gen_.IsTileWalkable(newFinalPosition))
+                    {
+                        transform.position = newFinalPosition;
+                    }
                 }
+
             }
         }
     }
