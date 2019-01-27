@@ -143,7 +143,12 @@ public class Movement : MonoBehaviour
                 else
                 {
                     Vector2 newCarPos = cartesianPos + trip.normalized * movement;
-                    transform.position = cartesianToIso(newCarPos);
+                    Vector2 newFinalPosition = cartesianToIso(newCarPos);
+
+                    if (gen_.IsTileWalkable(newFinalPosition))
+                    {
+                        transform.position = newFinalPosition;
+                    }
                 }
 
             }

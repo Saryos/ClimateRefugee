@@ -80,7 +80,13 @@ public class Generator : MonoBehaviour
         if (tileLoc.x >= 0 && tileLoc.y >= 0 && tileLoc.x < tilemap.size.x && tileLoc.y < tilemap.size.y)
         {
             TileBase tile = tilemap.GetTile(tileLoc);
-            Debug.Log(tile.ToString());
+            Debug.Log(tile.name);
+
+            if (tile.name == "Water")
+            {
+                return false;
+            }
+
         }
         else
         {
