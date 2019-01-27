@@ -5,7 +5,9 @@ using UnityEngine;
 public class gameMaster : MonoBehaviour{
 
 	public GameObject[] defencePrefabs; // Fill in editor!
-	public AudioSource background_music;
+	public GameObject[] improvementPrefabs; // Fill in editor!
+
+	public AudioSource background_music; // Fill in editor!
 	public AudioSource disaster_music;
 	public AudioSource victory_music;
 	public AudioSource new_day_music;
@@ -110,18 +112,19 @@ public class gameMaster : MonoBehaviour{
 		}
 		victory = tester;
 		if(victory){
+			background_music.Pause();
 			victory_music.Play();
 			gui.winGame();
 		}
-		/*
+
 		// instantiate graphics
-		if(defencePrefabs.Length < id){
+		if(improvementPrefabs.Length < id){
 			MonoBehaviour.print("ERROR: Missing prefab from defence building array (did you fill it in editor?)");
 			return false;
 		}
 		Vector3 pos = new Vector3(3,3,0);
-		Instantiate(defencePrefabs[id],pos, Quaternion.identity);
-		*/
+		Instantiate(improvementPrefabs[id],pos, Quaternion.identity);
+	
 		return true;
 	}
 
@@ -152,6 +155,14 @@ public class gameMaster : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
+		if(!background_music.isPlaying
+		&& !disaster_music.isPlaying
+		&& !victory_music.isPlaying
+		&& !new_day_music.isPlaying
+		&& !defeat_music.isPlaying){
+			background_music.Play();
+		}
+		
 		// advance disasters
 		for(int i=0; i<data.noDisasters; i++){
 			data.disasters[i].value += Time.deltaTime*gameSpeed*(data.house.pollution[i]/100.0) + (data.disasters[i].state/100.0);
@@ -163,11 +174,13 @@ public class gameMaster : MonoBehaviour{
 				if(disaster(i)){
 					pauseGame();
 					gui.surviveDisaster(i);
+					background_music.Pause();
 					new_day_music.Play();
 					nextDay();
 				} else {
 					gameSpeed=0;
 					if(!defeat_music.isPlaying){
+						background_music.Pause();
 						defeat_music.Play();
 					}
 					gui.loseGame();
