@@ -10,11 +10,24 @@ public class Movement : MonoBehaviour
 
     private List<Vector2> route_ = new List<Vector2>();
 
+    private List<GameObject> toCollect_ = new List<GameObject>();
+
+    private float maxCollectDistance_ = 1.0f;
+
+    private bool isCollecting = false;
 
 
     public void collectResource(GameObject resource, bool waypoint)
     {
         Debug.Log("Ordered a collection");
+
+        if (!waypoint)
+        {
+            toCollect_.Clear();
+        }
+
+        toCollect_.Add(resource);
+
         MoveHere(resource.transform.position, waypoint);
     }
 
@@ -48,20 +61,52 @@ public class Movement : MonoBehaviour
         if (route_.Count != 0)
         {
             Vector2 cartesianPos = isoToCartesian(transform.position);
-            Vector2 cartesianTarget = isoToCartesian(route_[0]);
+            Vector2 cartCollectPos;
 
-            Vector2 trip = cartesianTarget - cartesianPos;
-
-            float movement = speed_ * Time.deltaTime;
-            if (trip.magnitude < movement)
+            if (toCollect_.Count != 0)
             {
-                transform.position = route_[0];
-                route_.RemoveAt(0);
+                cartCollectPos = isoToCartesian(toCollect_[0].transform.position);
+                Vector2 collectDistance = cartCollectPos - cartesianPos;
+                if (collectDistance.magnitude < maxCollectDistance_)
+                {
+                    Debug.Log("We are collecting");
+
+                    isCollecting = true;
+                    Collectable c = toCollect_[0].GetComponent<Collectable>();
+
+                    if (c.collect(Time.deltaTime))
+                    {
+                        toCollect_.RemoveAt(0);
+                    }
+
+                }
+                else
+                {
+                    isCollecting = false;
+                }
             }
             else
             {
-                Vector2 newCarPos = cartesianPos + trip.normalized * movement;
-                transform.position = cartesianToIso(newCarPos);
+                isCollecting = false;
+            }
+
+            if (!isCollecting)
+            {
+                Vector2 cartesianTarget = isoToCartesian(route_[0]);
+
+                Vector2 trip = cartesianTarget - cartesianPos;
+
+                float movement = speed_ * Time.deltaTime;
+                if (trip.magnitude < movement)
+                {
+                    transform.position = route_[0];
+                    route_.RemoveAt(0);
+                }
+                else
+                {
+                    Vector2 newCarPos = cartesianPos + trip.normalized * movement;
+                    transform.position = cartesianToIso(newCarPos);
+                }
             }
         }
     }

@@ -8,27 +8,43 @@ public class Collectable : MonoBehaviour
     public int resourceAmount_ = 0;
     public int id;
 
-    public gameMaster master_;
+    public float CollectionWork = 1.0f;
+    private float currentProgress_ = 0.0f;
+
+    private gameMaster master_;
     public SpriteRenderer renderer_;
 
     public Sprite usedSprite_;
 
-    public void collect()
+    public bool collect(float timeSpent)
     {
         if (resourceAmount_ == 0)
         {
             Debug.Log("ERROR: no resource amount set for collectable");
-            return;
+            return true;
         }
 
-        --resourceAmount_;
-        master_.addResource(id);
-
-        if (resourceAmount_ == 0)
+        if (currentProgress_ + timeSpent > CollectionWork)
         {
-            renderer_.sprite = usedSprite_;
+
+            --resourceAmount_;
+            master_.addResource(id);
+
+            if (resourceAmount_ == 0)
+            {
+                renderer_.sprite = usedSprite_;
+                return true;
+            }
+            currentProgress_ = 0;
         }
+        else
+        {
+            currentProgress_ += timeSpent;
+        }
+        return false;
     }
+
+
 
     // Start is called before the first frame update
     void Start()
