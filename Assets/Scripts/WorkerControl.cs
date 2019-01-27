@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WorkerControl : MonoBehaviour
 {
 
@@ -17,21 +18,43 @@ public class WorkerControl : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+        // select
+        if (Input.GetMouseButtonDown(0))
+        {
+
+        }
+
+        // order
+        if (Input.GetMouseButtonDown(1))
         {
             Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log("tried to move worker to position " + target.ToString());
+
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(target.x, target.y), -Vector2.up,0f);
 
 
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            if (hit.collider != null)
             {
-                selectedWorker_.AddWaypoint(target);
+                Collectable collect = hit.transform.gameObject.GetComponent<Collectable>();
+
+                if (collect != null)
+                {
+                    selectedWorker_.collectResource(hit.transform.gameObject,
+                        Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+                }
+                else
+                {
+                    print("Hit a non collectible");
+                }
+
             }
             else
             {
-                selectedWorker_.FirstMove(target);
-            }
+                
+                Debug.Log("tried to move worker to position " + target.ToString());
 
+                selectedWorker_.MoveHere(target,
+                    Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+            }
         }
         
     }

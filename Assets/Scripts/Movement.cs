@@ -10,20 +10,24 @@ public class Movement : MonoBehaviour
 
     private List<Vector2> route_ = new List<Vector2>();
 
-    public void FirstMove(Vector3 position)
+
+
+    public void collectResource(GameObject resource, bool waypoint)
     {
-        Debug.Log("Adding the first movement");
-        route_.Clear();
-        route_.Add(new Vector2(position.x, position.y));
+        Debug.Log("Ordered a collection");
+        MoveHere(resource.transform.position, waypoint);
     }
 
-    public void AddWaypoint(Vector3 position)
+    public void MoveHere(Vector3 position, bool waypoint)
     {
+        Debug.Log("Adding the movement");
+        if (!waypoint)
+        {
+            route_.Clear();
+        }
 
-        Debug.Log("Adding waypoint");
         route_.Add(new Vector2(position.x, position.y));
     }
-
     public Vector2 isoToCartesian(Vector2 isoCoord)
     {
         float carX = (isoCoord.x + isoCoord.y * 2)/ 2;

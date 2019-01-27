@@ -33,7 +33,8 @@ public class Collectable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject[] master = GameObject.FindGameObjectsWithTag("Master");
+        master_ = master[0].GetComponent<gameMaster>();
     }
 
     // Update is called once per frame
