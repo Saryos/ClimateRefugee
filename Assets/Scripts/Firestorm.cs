@@ -14,12 +14,15 @@ public class Firestorm : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         var shape = ps.shape;
         shape.scale = new Vector3(width, height, 1f);
-
-        ALL_CONSUMING_INFERNO();
     }
 
     public void ALL_CONSUMING_INFERNO()
     {
         ps.Play();
+    }
+
+    private void Update()
+    {
+        transform.position = mainCamera.transform.position + new Vector3(0f, 0f, 5f);
     }
 }
