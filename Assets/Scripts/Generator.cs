@@ -13,6 +13,7 @@ public class Generator : MonoBehaviour
     public Tile sandTile_;
 
     public GameObject tree_;
+    public GameObject rock_;
 
     private NoiseTest.OpenSimplexNoise noise_ = new NoiseTest.OpenSimplexNoise();
 
