@@ -5,6 +5,11 @@ using UnityEngine;
 public class gameMaster : MonoBehaviour{
 
 	public GameObject[] defencePrefabs; // Fill in editor!
+	public AudioSource background_music;
+	public AudioSource disaster_music;
+	public AudioSource victory_music;
+	public AudioSource new_day_music;
+	public AudioSource defeat_music;
 
 	gameState game;
 	myGui gui;
@@ -105,6 +110,7 @@ public class gameMaster : MonoBehaviour{
 		}
 		victory = tester;
 		if(victory){
+			victory_music.Play();
 			gui.winGame();
 		}
 		/*
@@ -157,9 +163,13 @@ public class gameMaster : MonoBehaviour{
 				if(disaster(i)){
 					pauseGame();
 					gui.surviveDisaster(i);
+					new_day_music.Play();
 					nextDay();
 				} else {
 					gameSpeed=0;
+					if(!defeat_music.isPlaying){
+						defeat_music.Play();
+					}
 					gui.loseGame();
 				}
 			}
