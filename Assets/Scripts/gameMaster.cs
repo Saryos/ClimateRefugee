@@ -36,7 +36,7 @@ public class gameMaster : MonoBehaviour{
 	}
 
 	public void addResource(int id){
-		data.resources[id].amount += 1;
+		data.addResource(id);
 	}
 
 	public bool buildDefence(int id){

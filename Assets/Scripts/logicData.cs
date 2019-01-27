@@ -64,10 +64,7 @@ public struct Disaster{
 	}
 }
 
-// advance of disaster on scale 0-1
-public double disasterAdvance(int id){
-	return (data.disasters[id].value/data.disasters[id].treshold);
-}
+
 
 public class logicData{
 	public int noResources = 0;
@@ -80,6 +77,18 @@ public class logicData{
 	public Improvement[] improvements; 
 	public Disaster[] disasters;
 	public House house;
+
+	// advance of disaster on scale 0-1
+	public double disasterAdvance(int id){
+		return (disasters[id].value/disasters[id].treshold);
+	}
+
+	public void addResource(int id){
+		resources[id].amount += 1;
+		for(int j=0; j<noDisasters; j++){
+			disasters[j].value += resources[id].pollution[j];
+		}
+	}
 
 	public void LoadControlData(){
 		FileStream fs = new FileStream("datasettings.txt", FileMode.Open, FileAccess.Read);

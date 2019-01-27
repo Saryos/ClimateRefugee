@@ -26,20 +26,19 @@ public class myGui : MonoBehaviour
 
 
 
-
+		// resources
 		for(int i=0; i<data.noResources; i++){
-			if(GUI.Button(new Rect(200,20+30*i,100,30), data.resources[i].name + " " + data.resources[i].amount)){
-				// totally wrong place for logic!
-				data.resources[i].amount += 1;
-				for(int j=0; j<data.noDisasters; j++){
-					data.disasters[j].value += data.resources[i].pollution[j];
-				}
+			if(GUI.Button(new Rect(Screen.width-200,30*data.noDisasters+20+30*i,180,30), data.resources[i].name + " " + data.resources[i].amount)){
+				data.addResource(i);
 			}
 		}
+
+		// disasters
 		for(int i=0; i<data.noDisasters; i++){
-			GUI.Box(new Rect(300,20+30*i,100,30), data.disasters[i].name + " " + data.disasters[i].value);
+			GUI.Box(new Rect(Screen.width-200,20+30*i,180,30), data.disasters[i].name + " " + data.disasters[i].value);
 		}
 
+		//defences
 		for(int i=0; i<data.noDefences; i++){
 			if(GUI.Button(new Rect(10,20+30*i,100,30), data.defences[i].name + " " + data.defences[i].level)){
 				myMaster.buildDefence(i);
