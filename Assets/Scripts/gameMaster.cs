@@ -18,6 +18,7 @@ public class gameMaster : MonoBehaviour{
     public int levelHeight_ = 40;
 
 	public double gameSpeed = 1.0;
+	double oldGameSpeed = 0; // save speed durig pause
 
     public gameState giveGamestate(){
 		return game;
@@ -33,6 +34,17 @@ public class gameMaster : MonoBehaviour{
 
 	public logicData giveData(){
 		return data;
+	}
+
+	public void pauseGame(){
+		if (gameSpeed>0){
+			oldGameSpeed = gameSpeed;
+			gameSpeed=0;
+		}
+	}
+
+	public void resumeGame(){
+		gameSpeed = oldGameSpeed;
 	}
 
 	public void addResource(int id){
@@ -99,6 +111,8 @@ public class gameMaster : MonoBehaviour{
 		for(int i=0; i<data.noDisasters; i++){
 			if(data.disasters [i].value > data.disasters [i].treshold){
 				if(disaster(i)){
+					pauseGame();
+					gui.surviveDisaster(i);
 					nextDay();
 				} else {
 					gameSpeed=0;

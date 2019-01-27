@@ -35,7 +35,6 @@ public struct Defence{
 		cost = c;
 		value = d;
 	}
-
 }
 
 public struct Improvement{
