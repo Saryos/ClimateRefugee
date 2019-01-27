@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8066445422406674471}
   - component: {fileID: 8066445422406674464}
   - component: {fileID: 2714116947299327906}
-  - component: {fileID: 1126423667083141560}
   - component: {fileID: 388459789}
   m_Layer: 0
   m_Name: Worker
@@ -95,22 +94,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &1126423667083141560
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8066445422406674465}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 48bbe0d86124e834e867347cfe144b19, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &388459789
 Animator:
   serializedVersion: 3
@@ -121,7 +104,7 @@ Animator:
   m_GameObject: {fileID: 8066445422406674465}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0503e99bec018c24c959e7f520755aee, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
