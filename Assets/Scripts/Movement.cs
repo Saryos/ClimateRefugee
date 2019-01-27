@@ -19,18 +19,26 @@ public class Movement : MonoBehaviour
 
     private Generator gen_ = null;
 
+
+    void cancelCollection()
+    {
+        foreach (GameObject res in toCollect_)
+        {
+            Collectable c2 = res.GetComponent<Collectable>();
+            c2.CancelCollect();
+        }
+        toCollect_.Clear();
+    }
+
     public void collectResource(GameObject resource, bool waypoint)
     {
+        MoveHere(resource.transform.position, waypoint);
         Debug.Log("Ordered a collection");
-
-        if (!waypoint)
-        {
-            toCollect_.Clear();
-        }
 
         toCollect_.Add(resource);
 
-        MoveHere(resource.transform.position, waypoint);
+        Collectable c = resource.GetComponent<Collectable>();
+        c.WantToCollect();
     }
 
     public void MoveHere(Vector3 position, bool waypoint)
@@ -39,6 +47,7 @@ public class Movement : MonoBehaviour
         if (!waypoint)
         {
             route_.Clear();
+            cancelCollection();
         }
 
         Vector2 startPosition = transform.position;
@@ -105,6 +114,7 @@ public class Movement : MonoBehaviour
                             route_.RemoveAt(0);
                         }
                         toCollect_.RemoveAt(0);
+                        c.CancelCollect();
                     }
 
                 }
