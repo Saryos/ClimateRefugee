@@ -56,27 +56,39 @@ public class myGui : MonoBehaviour
 			GUI.Box(new Rect(Screen.width-200,20+30*i,180,30), data.disasters[i].name + " " + (int)(data.disasterAdvance(i)*100) + "%");
 		}
 
+
+
 		//defences
 		for(int i=0; i<data.noDefences; i++){
+			string defence_values = "";
+			for(int j=0; j<data.noDisasters; j++){
+				defence_values += data.defences[i].value[j] + " ";
+			}
 			if(GUI.Button(new Rect(10,20+40*i,100,40), data.defences[i].name + " " + data.defences[i].level + " cost: " + data.defences[i].cost[0] + " " + data.defences[i].cost[1] + "\n"
-				+ "def: " + data.defences[i].value[0] + " " + data.defences[i].value[1] + " "+ data.defences[i].value[2] + " "+ data.defences[i].value[3])){
+				+ "def: " + defence_values)){
 				myMaster.buildDefence(i);
 			}
 		}
 
 		//improvements
 		for(int i=0; i<data.noImprovements; i++){
+			string defence_values = "";
+			for(int j=0; j<data.noDisasters; j++){
+				defence_values += data.improvements[i].value[j] + " ";
+			}
 			if(GUI.Button(new Rect(10,Screen.height-50-55*i,100,55), data.improvements[i].name + " " + data.improvements[i].level+ "\n"
 				+ "cost: " + data.improvements[i].cost[0] + " " + data.improvements[i].cost[1] +"\n"
-				+ "value: " + data.improvements[i].value[0] + " " + data.improvements[i].value[1] + " " + data.improvements[i].value[2] + " " + data.improvements[i].value[3] + " ")){
+				+ "value: " + defence_values)){
 				myMaster.buildImprovement(i);
 			}
 		}
 
 		// house
-	
-			if(GUI.Button(new Rect(120,Screen.height-50,120,40), "house" + " " + data.house.pollution[0]+ " " + data.house.pollution[1]+ " "
-				+ data.house.pollution[2]+ " "+ data.house.pollution[3])){
+		string house_values = "";
+		for(int j=0; j<data.noDisasters; j++){
+			house_values += data.house.pollution[j] + " ";
+		}
+			if(GUI.Button(new Rect(120,Screen.height-50,120,40), "house" + " " + house_values)){
 			}
 	
 
