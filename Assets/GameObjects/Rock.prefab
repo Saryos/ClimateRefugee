@@ -97,7 +97,7 @@ MonoBehaviour:
   id: 1
   CollectionWork: 2
   renderer_: {fileID: 3906807658346680228}
-  usedSprite_: {fileID: 21300000, guid: 7c4ba711382e03f40a7dc54bcaf6d90f, type: 3}
+  usedSprite_: {fileID: 21300000, guid: 791ca257ce621d749b99eb1ec8ec8e4f, type: 3}
 --- !u!58 &7388416817606438308
 CircleCollider2D:
   m_ObjectHideFlags: 0
