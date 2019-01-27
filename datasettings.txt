@@ -28,6 +28,6 @@ name [resource costs]
 [environmental bonuses]
 improvements
 Oven 1 1
-0 1 0 0
+10 10 10 10
 Solar_Panels 2 5
 1 0 1 1
