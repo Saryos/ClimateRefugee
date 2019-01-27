@@ -1,6 +1,6 @@
 # resources 2
 # improvements 2
-# disasters 4
+# disasters 2
 # defences 2
 
 house

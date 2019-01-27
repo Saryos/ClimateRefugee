@@ -185,32 +185,39 @@ public class gameMaster : MonoBehaviour{
 		for(int i=0; i<data.noDisasters; i++){
 			if(data.disasters [i].value > data.disasters [i].treshold){
 				if(disaster(i)){
-					pauseGame();
+					//pauseGame();
 					gui.surviveDisaster(i);
 					background_music.Pause();
 					new_day_music.Play();
 					nextDay();
 				} else {
+
 					gameSpeed=0;
 					if(!defeat_music.isPlaying){
 						background_music.Pause();
 						defeat_music.Play();
 					}
 					gui.loseGame();
+
+                    StartCoroutine(endRoutine());
 				}
 			}
 		}
     }
 
+
+    IEnumerator endRoutine()
+    {
+        yield return new WaitForSeconds(5);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
 	//disaster strikes
 	bool disaster(int id){
-
-
         if (id == 0)
         {
             Generator g = generator.GetComponent<Generator>();
             g.floodLevel();
-
         }
         else
         {
@@ -246,6 +253,8 @@ public class gameMaster : MonoBehaviour{
 
     void nextDay()
     {
+
+
         destroyWorld();
         createWorld();
     }
