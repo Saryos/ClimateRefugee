@@ -10,9 +10,14 @@ public class myGui : MonoBehaviour
 	gameMaster myMaster;
 	logicData data = null;
 	gameState game = null;
+	bool gameLost = false;
 
 	public void setGamemaster(gameMaster master){
 		myMaster = master;
+	}
+
+	public void loseGame(){
+		gameLost=true;
 	}
 
 	void OnGUI(){
@@ -35,7 +40,7 @@ public class myGui : MonoBehaviour
 
 		// disasters
 		for(int i=0; i<data.noDisasters; i++){
-			GUI.Box(new Rect(Screen.width-200,20+30*i,180,30), data.disasters[i].name + " " + data.disasters[i].value);
+			GUI.Box(new Rect(Screen.width-200,20+30*i,180,30), data.disasters[i].name + " " + (int)(data.disasterAdvance(i)*100) + "%");
 		}
 
 		//defences
@@ -45,7 +50,7 @@ public class myGui : MonoBehaviour
 			}
 		}
 
-
+		/*
 		for(int i=0; i<data.noDisasters; i++){
 			if (data.disasters [i].value > data.disasters [i].treshold) {
 				GUIStyle myButtonStyle = new GUIStyle (GUI.skin.button);
@@ -60,6 +65,21 @@ public class myGui : MonoBehaviour
 				// use style in button
 				GUI.Box (new Rect (50, 10, 350, 250), "Death by " + data.disasters[i].name, myButtonStyle);
 			}
+		}
+		*/
+		if (gameLost){
+			GUIStyle myButtonStyle = new GUIStyle (GUI.skin.button);
+			myButtonStyle.fontSize = 50;
+			// Load and set Font
+			Font myFont = (Font)Resources.Load ("Fonts/comic", typeof(Font));
+			myButtonStyle.font = myFont;
+			// Set color for selected and unselected buttons
+			myButtonStyle.normal.textColor = Color.red;
+			myButtonStyle.hover.textColor = Color.red;
+
+			// use style in button
+			GUI.Box (new Rect (50, 10, 350, 250), "Death", myButtonStyle);
+			GUI.Box (new Rect (30,270,390,30), "Sakari jäätyi ilman villapaitaa");
 		}
 	}
 

@@ -55,12 +55,14 @@ public struct Improvement{
 public struct Disaster{
 	public string name;
 	public double value;
+	public double state;
 	public double treshold;
 
-	public Disaster(string a, double b, double c){
+	public Disaster(string a, double b, double c, double d){
 		name = a;
 		value = b;
 		treshold = c;
+		state = d;
 	}
 }
 
@@ -151,7 +153,7 @@ public class logicData{
 					txt = sr.ReadLine();
 					txtbits = txt.Split(' ');
 
-					disasters[i]=new Disaster(txtbits[0], 0, 10);
+					disasters[i]=new Disaster(txtbits[0], 0, 100, 0);
 				}			
 			}
 
