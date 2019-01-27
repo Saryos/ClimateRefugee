@@ -10,6 +10,8 @@ public class gameMaster : MonoBehaviour{
 	myGui gui;
 	logicData data;
 
+	bool victory = false;
+
     public GameObject generatorPF;
     private GameObject generator = null;
 
@@ -72,6 +74,48 @@ public class gameMaster : MonoBehaviour{
 		}
 		Vector3 pos = new Vector3(3,3,0);
 		Instantiate(defencePrefabs[id],pos, Quaternion.identity);
+		return true;
+	}
+
+	public bool buildImprovement(int id){
+		// can we afford building?
+		for(int j=0; j<data.noResources; j++){
+			if(data.resources[j].amount < data.improvements[id].cost[j]){
+				return false;
+			}
+		}
+
+		//build
+		data.improvements[id].level += 1;
+		for(int j=0; j<data.noResources; j++){
+			data.resources[j].amount -= data.improvements[id].cost[j];
+		}
+
+		//improve house
+		for(int j=0; j<data.noDisasters; j++){
+			data.house.pollution[j] -= data.improvements[id].value[j];
+		}
+
+		// check for victory
+		bool tester = true;
+		for(int j=0; j<data.noDisasters; j++){
+			if(data.house.pollution[j]>0){
+				tester = false;
+			}
+		}
+		victory = tester;
+		if(victory){
+			gui.winGame();
+		}
+		/*
+		// instantiate graphics
+		if(defencePrefabs.Length < id){
+			MonoBehaviour.print("ERROR: Missing prefab from defence building array (did you fill it in editor?)");
+			return false;
+		}
+		Vector3 pos = new Vector3(3,3,0);
+		Instantiate(defencePrefabs[id],pos, Quaternion.identity);
+		*/
 		return true;
 	}
 

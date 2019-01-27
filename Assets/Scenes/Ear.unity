@@ -223,6 +223,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9289a81373ade7468f9aea8e9695f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defencePrefabs:
+  - {fileID: 3258720019872333772, guid: e7e99f81eaae37042a50473cb31ffb79, type: 3}
+  - {fileID: 8488391644721156538, guid: 37774b7fea97693438f1e24f12aeb371, type: 3}
+  generatorPF: {fileID: 1231981731353006350, guid: 4075ebab68d69c54db84717e27eabe70,
+    type: 3}
+  levelWidth_: 40
+  levelHeight_: 40
+  gameSpeed: 1
 --- !u!4 &1894509760
 Transform:
   m_ObjectHideFlags: 0
