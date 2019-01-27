@@ -47,7 +47,7 @@ public class myGui : MonoBehaviour
 		// resources
 		for(int i=0; i<data.noResources; i++){
 			if(GUI.Button(new Rect(Screen.width-200,30*data.noDisasters+20+30*i,180,30), data.resources[i].name + " " + data.resources[i].amount)){
-				data.addResource(i);
+				//data.addResource(i);
 			}
 		}
 
@@ -58,17 +58,28 @@ public class myGui : MonoBehaviour
 
 		//defences
 		for(int i=0; i<data.noDefences; i++){
-			if(GUI.Button(new Rect(10,20+30*i,100,30), data.defences[i].name + " " + data.defences[i].level)){
+			if(GUI.Button(new Rect(10,20+40*i,100,40), data.defences[i].name + " " + data.defences[i].level + " cost: " + data.defences[i].cost[0] + " " + data.defences[i].cost[1] + "\n"
+				+ "def: " + data.defences[i].value[0] + " " + data.defences[i].value[1] + " "+ data.defences[i].value[2] + " "+ data.defences[i].value[3])){
 				myMaster.buildDefence(i);
 			}
 		}
 
 		//improvements
 		for(int i=0; i<data.noImprovements; i++){
-			if(GUI.Button(new Rect(10,Screen.height-20-30*i,100,30), data.improvements[i].name + " " + data.improvements[i].level)){
+			if(GUI.Button(new Rect(10,Screen.height-50-55*i,100,55), data.improvements[i].name + " " + data.improvements[i].level+ "\n"
+				+ "cost: " + data.improvements[i].cost[0] + " " + data.improvements[i].cost[1] +"\n"
+				+ "value: " + data.improvements[i].value[0] + " " + data.improvements[i].value[1] + " " + data.improvements[i].value[2] + " " + data.improvements[i].value[3] + " ")){
 				myMaster.buildImprovement(i);
 			}
 		}
+
+		// house
+	
+			if(GUI.Button(new Rect(120,Screen.height-50,120,40), "house" + " " + data.house.pollution[0]+ " " + data.house.pollution[1]+ " "
+				+ data.house.pollution[2]+ " "+ data.house.pollution[3])){
+			}
+	
+
 		/*
 		for(int i=0; i<data.noDisasters; i++){
 			if (data.disasters [i].value > data.disasters [i].treshold) {
