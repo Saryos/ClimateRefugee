@@ -148,6 +148,8 @@ public class Movement : MonoBehaviour
                 {
                     transform.position = route_[0];
                     route_.RemoveAt(0);
+                    if(route_.Count == 0)
+                        animator.SetInteger("State", 0);
                 }
                 else
                 {
