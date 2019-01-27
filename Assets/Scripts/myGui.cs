@@ -11,6 +11,8 @@ public class myGui : MonoBehaviour
 	logicData data = null;
 	gameState game = null;
 	bool gameLost = false;
+	bool survived = false;
+	int disaster; // current disaster
 
 	public void setGamemaster(gameMaster master){
 		myMaster = master;
@@ -18,6 +20,12 @@ public class myGui : MonoBehaviour
 
 	public void loseGame(){
 		gameLost=true;
+	}
+
+	public void surviveDisaster(int id){
+		MonoBehaviour.print("survive!");
+		survived = true;
+		disaster = id;
 	}
 
 	void OnGUI(){
@@ -79,7 +87,25 @@ public class myGui : MonoBehaviour
 
 			// use style in button
 			GUI.Box (new Rect (50, 10, 350, 250), "Death", myButtonStyle);
-			GUI.Box (new Rect (30,270,390,30), "Sakari jäätyi ilman villapaitaa");
+			GUI.Box (new Rect (30,270,390,50), "Sakari jäätyi ilman villapaitaa\nWihout a sweater, Sakari froze to death");
+		}
+		if (survived){
+			GUIStyle myButtonStyle = new GUIStyle (GUI.skin.button);
+			myButtonStyle.fontSize = 50;
+			// Load and set Font
+			Font myFont = (Font)Resources.Load ("Fonts/comic", typeof(Font));
+			myButtonStyle.font = myFont;
+			// Set color for selected and unselected buttons
+			myButtonStyle.normal.textColor = Color.blue;
+			myButtonStyle.hover.textColor = Color.blue;
+
+			// use style in button
+			if (GUI.Button (new Rect (50, 10, 350, 250), data.disasters[disaster].name, myButtonStyle)){
+				survived = false;
+				myMaster.resumeGame();
+			}
+			GUI.Box (new Rect (30,270,390,50), "You have survived, but your house is lost\n" +
+				"and you have moved to new place. Click to continue.");
 		}
 	}
 
